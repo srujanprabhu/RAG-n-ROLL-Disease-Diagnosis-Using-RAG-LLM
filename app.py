@@ -62,22 +62,29 @@ def record_feedback(question, response, context, response_time, session):
 if 'first_run' not in st.session_state:
     st.session_state.first_run = True
 # Connection parameters
+# Read Snowflake credentials from secrets
+snowflake_credentials = st.secrets["snowflake"]
+
+# Snowflake connection using secrets
 sf_connection = sf.connect(
-    user="SRUJANPRABHU",
-    password="sp123@SP123",
-    account="xcvpeuv-jn10394",
-    warehouse="COMPUTE_WH",
-    database="snowflake_llm_poc",
-    schema="PUBLIC"
+    user=snowflake_credentials["user"],
+    password=snowflake_credentials["password"],
+    account=snowflake_credentials["account"],
+    warehouse=snowflake_credentials["warehouse"],
+    database=snowflake_credentials["database"],
+    schema=snowflake_credentials["schema"]
 )
+
+# Snowpark session using secrets
 session = Session.builder.configs({
-    "account": "xcvpeuv-jn10394",
-    "user": "SRUJANPRABHU",
-    "password": "sp123@SP123",
-    "warehouse": "COMPUTE_WH",
-    "database": "snowflake_llm_poc",
-    "schema": "PUBLIC"
+    "account": snowflake_credentials["account"],
+    "user": snowflake_credentials["user"],
+    "password": snowflake_credentials["password"],
+    "warehouse": snowflake_credentials["warehouse"],
+    "database": snowflake_credentials["database"],
+    "schema": snowflake_credentials["schema"]
 }).create()
+
 if st.session_state.first_run:
     create_temp_table_query = """
     CREATE OR REPLACE TABLE temp (
