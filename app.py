@@ -410,7 +410,7 @@ elif task == "View Data":
             st.info("Ask a question to see relevant context data.")
     with tab2:
         st.write("#### Medline Data:")
-        medline_data = session.sql("SELECT C1, C2 FROM medline_ency_all LIMIT 10").to_pandas()
+        medline_data = session.sql("SELECT * FROM medline_ency_all").to_pandas()
         st.dataframe(medline_data)
         st.write("#### Uploaded PDF Data:")
         temp_data = session.sql("SELECT chunk_id, chunk_text FROM temp").to_pandas()
