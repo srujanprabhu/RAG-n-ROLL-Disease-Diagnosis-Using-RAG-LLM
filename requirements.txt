@@ -1,8 +1,7 @@
-trulens.core
-plotly-express
+trulens
+plotly
 streamlit
-snowflake
-snowflake.connector
-snowflake.snowpark
+snowflake-connector-python
+snowflake-snowpark-python
 pandas
 PyPDF2
