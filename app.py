@@ -8,7 +8,6 @@ import pandas as pd
 from PyPDF2 import PdfReader
 import re
 
-tru = TruSession()
 st.set_page_config(
     page_title="Disease Diagnosis Using RAG-LLM",
     page_icon="🚑",
